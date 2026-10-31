@@ -1,5 +1,7 @@
 # AskDB
 
+Full hosting setup: [Deploy the complete app](docs/DEPLOYMENT.md).
+
 **Your data. Just ask.**
 
 Upload a CSV or SQLite database, ask questions in plain English or by voice, and

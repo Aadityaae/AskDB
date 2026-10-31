@@ -29,6 +29,8 @@ __pycache__/
 pgdata/
 datasets/
 uploads/
+backups/
+*.sql
 embedding_cache/
 output/
 .DS_Store

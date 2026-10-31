@@ -1,0 +1,20 @@
+{$APP_DOMAIN} {
+	encode zstd gzip
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+	@workspace path /workspace /workspace/*
+	handle /app/static/* {
+		rewrite * /workspace{uri}
+		reverse_proxy frontend:8501
+	}
+	handle @workspace {
+		reverse_proxy frontend:8501
+	}
+	handle {
+		reverse_proxy api:8000
+	}
+}

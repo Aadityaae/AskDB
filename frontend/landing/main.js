@@ -42,9 +42,9 @@ document.querySelectorAll('[data-panel]').forEach(button => button.addEventListe
 }));
 document.querySelector('.close-dialog').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', e => { const box = dialog.getBoundingClientRect(); if (e.clientX < box.left || e.clientX > box.right || e.clientY < box.top || e.clientY > box.bottom) dialog.close(); });
-// Keep links usable as standalone files and on the local API host.
+// The API selects the local workspace URL; production routes this same path.
 if (location.protocol !== 'file:') document.querySelectorAll('[data-workspace]').forEach(link => {
-  const url = new URL(location.href); url.port = '8501'; url.pathname = '/'; url.search = '?entry=' + link.dataset.workspace; url.hash = ''; link.href = url.href;
+  const url = new URL('/workspace', location.href); url.search = '?entry=' + link.dataset.workspace; link.href = url.href;
 });
 function syncVideo() {
   const paused = userPaused || document.hidden;

@@ -1,6 +1,15 @@
 .venv
 .env
+.env.*
+!.env.example
 .git
 __pycache__
 .pytest_cache
 .cache
+output
+uploads
+datasets
+backups
+*.db
+*.sqlite
+*.sqlite3

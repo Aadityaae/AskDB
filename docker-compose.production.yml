@@ -1,0 +1,85 @@
+# Standalone stack; do not combine with docker-compose.yml.
+name: askdb
+x-app: &app
+  image: askdb-app:production
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+  restart: unless-stopped
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Required}
+      METADATA_PASSWORD: ${METADATA_PASSWORD:?Required}
+      READONLY_PASSWORD: ${READONLY_PASSWORD:?Required}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  models:
+    <<: *app
+    restart: "no"
+    command: [sh, -c, "python -m scripts.download_embeddings && python -m scripts.download_speech_model"]
+    volumes:
+      - app_cache:/home/appuser/.cache
+  api:
+    <<: *app
+    environment:
+      DATABASE_URL: postgresql+psycopg://metadata:${METADATA_PASSWORD:?Required}@postgres:5432/metadata
+      READONLY_DATABASE_URL: postgresql+psycopg://analyst:${READONLY_PASSWORD:?Required}@postgres:5432/business
+      LLM_PROVIDER: groq
+      GROQ_API_KEY: ${GROQ_API_KEY:?Required}
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
+      VALIDATION_MODE: ${VALIDATION_MODE:-strict}
+      WORKSPACE_URL: /workspace/
+      SPEECH_MODEL: tiny.en
+      SPEECH_MODEL_DIR: /home/appuser/.cache/texttosql/speech
+      DATASET_DIR: /home/appuser/.cache/texttosql/datasets
+    volumes:
+      - app_cache:/home/appuser/.cache
+    depends_on:
+      postgres:
+        condition: service_healthy
+      models:
+        condition: service_completed_successfully
+  frontend:
+    <<: *app
+    command: [streamlit, run, frontend/streamlit_app.py, --server.address=0.0.0.0, --server.baseUrlPath=workspace]
+    environment:
+      API_BASE_URL: http://api:8000
+      PUBLIC_HOME_URL: /landing/
+    depends_on:
+      api:
+        condition: service_started
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Set a domain pointing to this server}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+      - frontend
+volumes:
+  pgdata:
+  app_cache:
+  caddy_data:
+  caddy_config:

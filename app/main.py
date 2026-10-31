@@ -58,6 +58,12 @@ def landing_home():
     return RedirectResponse('/landing/')
 
 
+@app.get('/workspace', include_in_schema=False)
+def workspace_entry(request: Request, entry: str = Query('signin', pattern=r'^(signin|signup|workspace)$')):
+    target = settings().workspace_url or str(request.url.replace(port=8501, path='/', query=''))
+    return RedirectResponse(target.rstrip('/') + '/?entry=' + entry)
+
+
 @app.post('/v1/transcribe', response_model=TranscriptionResponse, openapi_extra={'requestBody': {'required': True, 'content': {'multipart/form-data': {'schema': {'type': 'object', 'required': ['audio'], 'properties': {'audio': {'type': 'string', 'format': 'binary'}}}}}}})
 async def transcribe_recording(request: Request, user=Depends(require_user)):
     try:

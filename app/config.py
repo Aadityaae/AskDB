@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env', extra='ignore')
     database_url: str = ''
     readonly_database_url: str = ''
+    workspace_url: str = ''
     llm_provider: Literal['groq', 'ollama'] = 'groq'
     groq_api_key: SecretStr = SecretStr('')
     groq_model: str = 'openai/gpt-oss-120b'
