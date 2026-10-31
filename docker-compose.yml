@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      METADATA_PASSWORD: ${METADATA_PASSWORD:?Set METADATA_PASSWORD in .env}
+      READONLY_PASSWORD: ${READONLY_PASSWORD:?Set READONLY_PASSWORD in .env}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://metadata:${METADATA_PASSWORD}@postgres:5432/metadata
+      READONLY_DATABASE_URL: postgresql+psycopg://analyst:${READONLY_PASSWORD}@postgres:5432/business
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:8b}
+      LLM_PROVIDER: ${LLM_PROVIDER:-groq}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-120b}
+      VALIDATION_MODE: ${VALIDATION_MODE:-strict}
+      SPEECH_MODEL: ${SPEECH_MODEL:-tiny.en}
+      DATASET_DIR: /home/appuser/.cache/texttosql/datasets
+      SPEECH_MODEL_DIR: /home/appuser/.cache/texttosql/speech
+    dns: ["1.1.1.1", "8.8.8.8"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    ports: ["127.0.0.1:8000:8000"]
+    volumes:
+      - embedding_cache:/home/appuser/.cache
+    depends_on:
+      postgres:
+        condition: service_healthy
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: streamlit run frontend/streamlit_app.py --server.address=0.0.0.0
+    environment:
+      API_BASE_URL: http://api:8000
+    ports: ["127.0.0.1:8501:8501"]
+    depends_on: [api]
+volumes:
+  pgdata:
+  embedding_cache:

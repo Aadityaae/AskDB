@@ -1,0 +1,86 @@
+/* Mounted only in the authenticated light workspace, after the shared theme. */
+:root:has(.studio-light-marker){color-scheme:light;--line:#a7b6bf;--disabled-ink:#586771;--disabled-bg:#e5eaed;}
+.stApp{color-scheme:light;}
+
+/* Native widget labels and Markdown have explicit dark-theme colors. */
+.stApp [data-testid="stMarkdownContainer"],
+.stApp [data-testid="stMarkdownContainer"]>p,
+.stApp [data-testid="stWidgetLabel"] p,
+.stApp [data-testid="stMetricLabel"] p,
+.stApp [data-testid="stRadio"] label p,
+.stApp [data-testid="stCheckbox"] label p,
+.stApp [data-testid="stToggle"] label p{color:var(--ink)!important;}
+.stApp [data-testid="stCaptionContainer"] p{color:var(--muted)!important;}
+.stApp [data-testid="stMarkdownContainer"] a{color:var(--accent)!important;text-decoration:underline;text-underline-offset:3px;}
+.stApp [data-testid="stMarkdownContainer"] code{background:var(--raised)!important;color:#214d46!important;border-radius:4px;}
+
+/* Set both the button and its nested label/icons, in every interactive state. */
+.stApp button:not([kind="primary"]):not([kind="primaryFormSubmit"]),
+[data-testid="stPopoverBody"] button,
+[data-baseweb="calendar"] button{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important;}
+.stApp button :is(p,span,svg),
+[data-testid="stPopoverBody"] button :is(p,span,svg),
+[data-baseweb="calendar"] button :is(p,span,svg){color:inherit!important;}
+.stApp button [data-testid="stMarkdownContainer"],
+.stApp button [data-testid="stMarkdownContainer"]>p,
+[data-testid="stPopoverBody"] button [data-testid="stMarkdownContainer"]>p{color:inherit!important;}
+.stApp button:not(:disabled):hover,
+[data-testid="stPopoverBody"] button:not(:disabled):hover{background:var(--raised)!important;color:var(--ink)!important;border-color:var(--accent)!important;transform:none!important;}
+.stApp button[kind="primary"],.stApp button[kind="primaryFormSubmit"]{background:var(--accent)!important;color:var(--on-accent)!important;border-color:var(--accent)!important;}
+.stApp button[kind="primary"]:not(:disabled):hover,
+.stApp button[kind="primaryFormSubmit"]:not(:disabled):hover{background:#105b52!important;color:#fff!important;border-color:#105b52!important;filter:none!important;}
+.stApp button:disabled,.stApp button[aria-disabled="true"],
+[data-testid="stPopoverBody"] button:disabled{background:var(--disabled-bg)!important;color:var(--disabled-ink)!important;border-color:var(--line)!important;opacity:1!important;box-shadow:none!important;filter:none!important;}
+.stApp button:focus-visible,.stApp input:focus-visible,.stApp textarea:focus-visible{outline:2px solid var(--accent)!important;outline-offset:3px;}
+
+/* Keep the navigation and starter actions visually distinct from normal buttons. */
+.st-key-suggestion_grid [data-testid="stButton"] button{background:transparent!important;}
+.st-key-suggestion_grid [data-testid="stButton"] button:hover{background:transparent!important;color:var(--accent)!important;}
+.st-key-workspace_nav [data-testid="stRadio"] label p{color:var(--muted)!important;}
+.st-key-workspace_nav [data-testid="stRadio"] label:hover p{color:var(--ink)!important;}
+.st-key-workspace_nav [data-testid="stRadio"] label:has(input:checked) p{color:var(--accent)!important;}
+.st-key-workspace_nav [data-testid="stToggle"] p{color:var(--muted)!important;}
+
+/* Inputs, source picker, radio options, file imports and number controls. */
+.stApp :is(input,textarea){color:var(--ink)!important;background:var(--field)!important;}
+.stApp :is(input,textarea)::placeholder{color:var(--muted)!important;opacity:1!important;}
+.stApp [data-baseweb="select"] :is(div,span,svg){color:var(--ink)!important;}
+.stApp [data-testid="stNumberInput"] button{background:var(--raised)!important;}
+.stApp [data-testid="stRadio"] label,.stApp [data-testid="stCheckbox"] label{color:var(--ink)!important;}
+.stApp [data-testid="stFileUploaderDropzone"]{background:var(--surface)!important;border:1px dashed var(--line)!important;color:var(--ink)!important;}
+.stApp [data-testid="stFileUploaderDropzone"] :is(p,span,small,svg){color:var(--ink)!important;}
+.stApp [data-testid="stFileUploaderFile"]{color:var(--ink)!important;background:var(--surface)!important;}
+.stApp [data-testid="stFileUploaderFile"] :is(p,span,small){color:var(--ink)!important;}
+.stApp [data-testid="stTextInput"]:focus-within [data-baseweb="input"],
+.stApp [data-testid="stSelectbox"]:focus-within [data-baseweb="select"]>div{border-color:var(--accent)!important;}
+.stApp :is([data-baseweb="input"],[data-baseweb="textarea"],[data-baseweb="select"]>div),
+.stApp [data-testid="stButton"] button:not([kind="primary"]),
+.stApp [data-testid="stPopover"] button{border-color:#7d909c!important;}
+
+/* Menus are portals outside the application root. */
+[data-testid="stPopoverBody"], [data-baseweb="popover"]>div,
+[data-baseweb="calendar"], [data-baseweb="menu"], [role="listbox"]{color-scheme:light;background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important;}
+[data-testid="stPopoverBody"] :is(p,label),
+[data-baseweb="calendar"] :is(p,label),
+[role="option"] :is(p,span,div){color:var(--ink)!important;}
+[role="option"]:hover,[role="option"][aria-selected="true"]{background:var(--accent-soft)!important;color:var(--accent)!important;}
+[data-baseweb="calendar"] [aria-selected="true"],
+[data-baseweb="calendar"] [aria-selected="true"] button{background:var(--accent)!important;color:var(--on-accent)!important;}
+
+/* Tabs and feedback controls must not keep the underlying dark selection. */
+.stApp [data-baseweb="tab"]{background:transparent!important;color:var(--muted)!important;}
+.stApp [data-baseweb="tab"][aria-selected="true"]{color:var(--accent)!important;}
+.stApp [data-testid="stButtonGroup"] button[data-selected],
+.stApp [data-testid="stButtonGroup"] button[aria-pressed="true"]{background:var(--accent-soft)!important;color:var(--accent)!important;border-color:var(--accent)!important;}
+.stApp [data-testid="stExpander"] summary :is(p,span,svg){color:var(--ink)!important;}
+.stApp [data-testid="stAlert"] :is(p,span,svg){color:var(--ink)!important;}
+.status-pill.review{color:#795000!important;background:#fff2d7!important;border-color:#a47d2d!important;}
+.status-pill.danger{color:#a12828!important;background:#ffeded!important;border-color:#bf7474!important;}
+.status-pill.success{color:#285d28!important;background:#edf4e8!important;border-color:#73946b!important;}
+.stApp [data-testid="stMetricValue"]{color:var(--ink)!important;}
+.picture-label,.picture-row b{color:var(--ink)!important;}
+
+/* Inverting code also inverted syntax and copy buttons. Use actual light colors. */
+:root:has(.studio-light-marker) [data-testid="stCode"]{filter:none!important;background:var(--surface)!important;color:var(--ink)!important;}
+.stApp [data-testid="stCode"] :is(pre,code){background:var(--surface)!important;color:var(--ink)!important;}
+.stApp [data-testid="stCode"] code span{color:var(--ink)!important;}

@@ -1,0 +1,59 @@
+/* Native Streamlit actions keep their handlers, semantics and keyboard support. */
+:root{--button-hover:#9ae8dc;--button-border:#576770;--button-shadow:#00000025;--button-sheen:#ffffff55;}
+:root:has(.studio-light-marker){--button-hover:#105b52;--button-border:#7d909c;--button-shadow:#17252d14;--button-sheen:#ffffff24;}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button{
+  position:relative;isolation:isolate;overflow:hidden;min-height:42px;
+  border-radius:12px!important;border:1px solid var(--button-border)!important;
+  background:var(--surface)!important;color:var(--ink)!important;
+  font-weight:550!important;box-shadow:inset 0 1px 0 var(--desk-edge),0 2px 3px var(--button-shadow)!important;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button :is(p,span,svg),
+.stApp button [data-testid="stMarkdownContainer"],.stApp button [data-testid="stMarkdownContainer"]>p{color:inherit!important;}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:not(:disabled):not([aria-disabled="true"]):hover{
+  background:var(--raised)!important;color:var(--ink)!important;border-color:var(--accent)!important;
+  box-shadow:inset 0 1px 0 var(--desk-edge),0 4px 9px var(--button-shadow)!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stFormSubmitButton"]) button:is([kind="primary"],[kind="primaryFormSubmit"]){
+  background:var(--accent)!important;color:var(--on-accent)!important;border-color:var(--accent)!important;
+  box-shadow:inset 0 1px 0 #ffffff30,inset 0 -2px 0 #00000016,0 3px 8px var(--button-shadow)!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stFormSubmitButton"]) button:is([kind="primary"],[kind="primaryFormSubmit"]):not(:disabled):hover{
+  background:var(--button-hover)!important;color:var(--on-accent)!important;border-color:var(--button-hover)!important;filter:none!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stFormSubmitButton"]) button:is([kind="primary"],[kind="primaryFormSubmit"])::after{
+  content:'';position:absolute;inset:0 auto 0 0;width:30%;height:100%;pointer-events:none;z-index:1;
+  background:linear-gradient(90deg,transparent,var(--button-sheen),transparent);
+  transform:translateX(-220%) skewX(-18deg);opacity:0;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stFormSubmitButton"]) button:is([kind="primary"],[kind="primaryFormSubmit"]):not(:disabled):hover::after{animation:button-glint .65s ease-out both;}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:not(:disabled):active{
+  transform:translateY(1px) scale(.985)!important;box-shadow:inset 0 2px 3px var(--button-shadow)!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:focus-visible{
+  outline:2px solid var(--accent)!important;outline-offset:4px;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:is(:disabled,[aria-disabled="true"]){
+  background:var(--raised)!important;color:var(--muted)!important;border-color:var(--line)!important;
+  box-shadow:none!important;opacity:1!important;transform:none!important;filter:none!important;
+}
+.stApp button:is(:disabled,[aria-disabled="true"])::after{display:none!important;}
+/* Voice opens a recorder; highlight its open state without implying recording. */
+.stApp .st-key-composer [data-testid="stPopover"] button[aria-expanded="true"]{
+  background:var(--accent-soft)!important;color:var(--accent)!important;border-color:var(--accent)!important;
+}
+.stApp .st-key-workspace_nav [data-testid="stPopover"] button{min-height:38px;border-radius:10px!important;box-shadow:none!important;}
+.st-key-workspace_nav [data-testid="stRadio"] label:has(input:checked){box-shadow:inset 0 -2px 0 var(--accent);}
+/* Starter cards remain a single quiet action instead of gaining nested boxes. */
+.stApp .st-key-suggestion_grid [data-testid="stButton"] button,
+.stApp .st-key-suggestion_grid [data-testid="stButton"] button:not(:disabled):hover{
+  background:transparent!important;border:0!important;box-shadow:none!important;border-radius:4px!important;transform:none!important;
+}
+.stApp .st-key-suggestion_grid [data-testid="stButton"] button:not(:disabled):hover{color:var(--accent)!important;}
+@keyframes button-glint{0%{transform:translateX(-150%) skewX(-18deg);opacity:0}20%{opacity:1}100%{transform:translateX(450%) skewX(-18deg);opacity:0}}
+@media(hover:hover) and (pointer:fine){.stApp .st-key-query_send button:not(:disabled):hover{transform:translateY(-1px)!important;}}
+@media(prefers-reduced-motion:reduce){
+  .stApp button,.stApp button::after{animation:none!important;transition:none!important;}
+  .stApp button::after{display:none!important;}
+  .stApp .st-key-query_send button:not(:disabled):hover{transform:none!important;}
+}

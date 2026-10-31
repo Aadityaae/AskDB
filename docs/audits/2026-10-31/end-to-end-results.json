@@ -1,0 +1,206 @@
+{
+  "checks": [
+    {
+      "name": "UI signup reaches authenticated workspace in dark mode",
+      "detail": true
+    },
+    {
+      "name": "duplicate signup rejects existing email",
+      "detail": null
+    },
+    {
+      "name": "invalid email rejected",
+      "detail": null
+    },
+    {
+      "name": "wrong password rejected",
+      "detail": null
+    },
+    {
+      "name": "forged bearer rejected",
+      "detail": null
+    },
+    {
+      "name": "password and session stored only as hashes",
+      "detail": null
+    },
+    {
+      "name": "fresh CSV and relational SQLite imports",
+      "detail": null
+    },
+    {
+      "name": "uploaded filename cannot traverse storage",
+      "detail": null
+    },
+    {
+      "name": "other user cannot read schema data",
+      "detail": null
+    },
+    {
+      "name": "other user cannot browse data",
+      "detail": null
+    },
+    {
+      "name": "other user cannot query data",
+      "detail": null
+    },
+    {
+      "name": "other user cannot read schema employees",
+      "detail": null
+    },
+    {
+      "name": "other user cannot browse employees",
+      "detail": null
+    },
+    {
+      "name": "other user cannot query employees",
+      "detail": null
+    },
+    {
+      "name": "UI source switching and preview match six CSV rows",
+      "detail": null
+    },
+    {
+      "name": "real UI natural-language completed total equals 500",
+      "detail": {
+        "status": "low_confidence",
+        "seconds": 36.97,
+        "reason": ""
+      }
+    },
+    {
+      "name": "history is private",
+      "detail": null
+    },
+    {
+      "name": "foreign feedback rejected",
+      "detail": null
+    },
+    {
+      "name": "owner feedback saved",
+      "detail": null
+    },
+    {
+      "name": "real model answer: How many employees are there in the sales department?",
+      "detail": {
+        "status": "success",
+        "expected": 3,
+        "reason": ""
+      }
+    },
+    {
+      "name": "real model answer: How many records are in the data table?",
+      "detail": {
+        "status": "success",
+        "expected": 6,
+        "reason": ""
+      }
+    },
+    {
+      "name": "unsafe SQL blocked: DELETE FROM data",
+      "detail": null
+    },
+    {
+      "name": "unsafe SQL blocked: SELECT * FROM sqlite_master",
+      "detail": null
+    },
+    {
+      "name": "unsafe SQL blocked: SELECT load_extension('/tmp/audit')",
+      "detail": null
+    },
+    {
+      "name": "unsafe SQL blocked: ATTACH DATABASE '/tmp/audit.db' AS stolen",
+      "detail": null
+    },
+    {
+      "name": "unsafe SQL blocked: SELECT 1; SELECT 2",
+      "detail": null
+    },
+    {
+      "name": "malformed SQLite rejected",
+      "detail": null
+    },
+    {
+      "name": "duplicate CSV headers rejected",
+      "detail": null
+    },
+    {
+      "name": "invalid voice rejected cleanly",
+      "detail": null
+    },
+    {
+      "name": "real local voice returns expected transcript",
+      "detail": {
+        "seconds": 3.77,
+        "duration": 3.6
+      }
+    },
+    {
+      "name": "voice endpoint never returns SQL or executes a question",
+      "detail": null
+    },
+    {
+      "name": "new account can navigate every page with uploaded sources",
+      "detail": null
+    },
+    {
+      "name": "UI logout revokes bearer session",
+      "detail": null
+    },
+    {
+      "name": "UI login restores existing account",
+      "detail": null
+    },
+    {
+      "name": "owner datasets persist after login",
+      "detail": null
+    },
+    {
+      "name": "concurrent login attempts cannot bypass ten-attempt limit",
+      "detail": {
+        "unauthorized": 10,
+        "limited": 10
+      }
+    }
+  ],
+  "failures": [],
+  "cloud_results": [
+    {
+      "question": "What is the total amount of completed orders?",
+      "sql": "SELECT SUM(total) AS total_amount FROM data WHERE LOWER(status) = LOWER('completed') LIMIT 1000",
+      "status": "low_confidence",
+      "results": [
+        {
+          "total_amount": 500.0
+        }
+      ],
+      "seconds": 36.97,
+      "reason": ""
+    },
+    {
+      "question": "How many employees are there in the sales department?",
+      "sql": "SELECT COUNT(*) AS employee_count FROM employees INNER JOIN departments ON employees.department_id = departments.id WHERE LOWER(departments.name) = LOWER('sales') LIMIT 1000",
+      "status": "success",
+      "results": [
+        {
+          "employee_count": 3
+        }
+      ],
+      "seconds": 5.26,
+      "reason": ""
+    },
+    {
+      "question": "How many records are in the data table?",
+      "sql": "SELECT COUNT(*) FROM data LIMIT 1000",
+      "status": "success",
+      "results": [
+        {
+          "COUNT(*)": 6
+        }
+      ],
+      "seconds": 4.59,
+      "reason": ""
+    }
+  ],
+  "temporary_accounts_and_files_removed": true
+}

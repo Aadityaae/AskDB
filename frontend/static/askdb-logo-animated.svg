@@ -1,0 +1,10 @@
+<svg class="askdb-mark" role="img" aria-label="AskDB logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none"><title>AskDB — Your data. Just ask.</title><style>.askdb-eyes{transform-origin:40px 28px;animation:blink 6s ease-in-out infinite}.askdb-row{animation:think 6s ease-in-out infinite}@keyframes blink{0%,34%,38%,72%,76%,100%{transform:scaleY(1)}36%,74%{transform:scaleY(.08)}}@keyframes think{0%,10%,42%,100%{stroke:#20342b}20%,30%{stroke:#48838b}}@media(prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+  <rect x="2" y="2" width="76" height="76" rx="23" fill="#d6f36a"/>
+  <g stroke="#20342b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 29v23c0 7 38 7 38 0V29" fill="#20342b" fill-opacity=".06"/>
+    <ellipse cx="40" cy="29" rx="19" ry="8"/>
+    <path class="askdb-row row-one" d="M21 40c0 7 38 7 38 0M21 51c0 7 38 7 38 0"/>
+    <path d="m48 57-9 10-1-10" fill="#d6f36a"/>
+  </g>
+  <g class="askdb-eyes" fill="#20342b"><circle cx="34" cy="28" r="2.4"/><circle cx="46" cy="28" r="2.4"/></g>
+</svg>

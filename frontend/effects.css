@@ -1,0 +1,49 @@
+/* The maximal motion layer uses small transforms, never moving text fields. */
+:root { --fx-a:#a1c66016; --fx-b:#92d5dc12; }
+[data-testid="stApp"]::before { content:''; position:fixed; inset:0; pointer-events:none; background:radial-gradient(ellipse at 15% 30%,var(--fx-a),transparent 38%),radial-gradient(ellipse at 85% 70%,var(--fx-b),transparent 35%); z-index:0; }
+[data-testid="stMainBlockContainer"] { position:relative; z-index:1; }
+.hero-accent { background:linear-gradient(110deg,var(--accent) 15%,var(--fx-ink-a,#92b86e) 38%,var(--accent) 55%,var(--fx-ink-b,#92cbd0) 75%,var(--accent)); background-clip:text; -webkit-background-clip:text; color:transparent; animation:title-arrive .85s .12s var(--ease-out) both; }
+.hero-period { color:#69b4bd; }
+.typing-headline { min-height:2.1em; }
+.typing-headline .hero-line { min-height:1.05em; }
+.typing-caret { display:none; width:2px; height:.78em; margin-left:5px; background:var(--accent); vertical-align:baseline; animation:caret-blink 1s steps(1) infinite; }
+.typing-headline.is-typing[data-typing-line="first"] .caret-first, .typing-headline.is-typing[data-typing-line="second"] .caret-second { display:inline-block; }
+@keyframes caret-blink { 50% { opacity:0; } }
+.topline::after { animation:line-draw 1.2s var(--ease-out) both, rail-light 7s 1.2s ease-in-out infinite; }
+.studio-symbol { animation:logo-nod 8s ease-in-out infinite; }
+.local-dot { animation:signal-fade 4s ease-in-out infinite; }
+.eyebrow { position:relative; }
+.page-heading { animation:page-sweep .8s var(--ease-out) both; }
+.section-divider { transform-origin:left; animation:line-draw .9s var(--ease-out) both; background:linear-gradient(90deg,var(--accent),var(--line) 60%,transparent); }
+.st-key-composer,.st-key-scalar_result,.data-picture,[data-testid="stExpander"],[data-testid="stMetric"] { position:relative; transition:border-color .35s,box-shadow .35s,background .35s; }
+.fx-spotlight { box-shadow:0 10px 35px #00000013,inset 0 0 55px #8eae5a0a !important; border-color:var(--accent) !important; }
+.fx-spotlight::after { content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(160px circle at 50% 20%,#a1bf691c,transparent 70%); z-index:1; }
+.fx-entered { animation:card-reveal .7s var(--ease-out) both; }
+[data-testid="stButton"] button:hover { box-shadow:0 6px 20px #75913b25; transform:translateY(-3px) scale(1.015); }
+[data-testid="stButton"] button:active { transform:scale(.96); }
+[data-testid="stSidebar"] [data-testid="stRadio"] label { animation:nav-arrive .55s var(--ease-out) both; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:nth-of-type(2) { animation-delay:.05s; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:nth-of-type(3) { animation-delay:.1s; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:nth-of-type(4) { animation-delay:.15s; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:nth-of-type(5) { animation-delay:.2s; }
+[data-testid="stAudioInput"] { transition:filter .35s,box-shadow .35s; border-radius:8px; }
+[data-testid="stAudioInput"]:hover { box-shadow:0 0 0 3px #8eae5a22; }
+.workspace-footer { animation:reveal .8s .3s var(--ease-out) both; }
+.archive-day i { background:linear-gradient(90deg,var(--accent),transparent); animation:line-draw .9s var(--ease-out) both; transform-origin:left; }
+.picture-bar { position:relative; overflow:hidden; }
+.picture-bar::after { content:''; position:absolute; inset:0; background:linear-gradient(100deg,transparent 20%,#ffffff33 50%,transparent 80%); transform:translateX(-100%); animation:bar-glint 1.2s 1s ease-in-out both; }
+.fx-click-burst { position:fixed; z-index:2147483645; width:12px; height:12px; margin:-6px; border:1px solid var(--accent); border-radius:50%; pointer-events:none; animation:click-ring .65s ease-out both; }
+.fx-paused *, .fx-paused *::before, .fx-paused *::after { animation-play-state:paused !important; }
+.fx-offscreen, .fx-offscreen *, .fx-offscreen *::before, .fx-offscreen *::after { animation-play-state:paused !important; }
+@keyframes atmosphere { to { transform:translate3d(5%,-3%,0) rotate(5deg); } }
+@keyframes ink-flow { 0%,100% { background-position:0 50%; } 50% { background-position:100% 50%; } }
+@keyframes rail-light { 50% { opacity:.3; } }
+@keyframes logo-nod { 0%,82%,100% { transform:rotate(0); } 88% { transform:rotate(-12deg); } 94% { transform:rotate(4deg); } }
+@keyframes signal-ping { 0% { box-shadow:0 0 0 0 #8eae5a50; } 70%,100% { box-shadow:0 0 0 7px #8eae5a00; } }
+@keyframes signal-fade {50%{opacity:.45;}}
+@keyframes page-sweep { from { opacity:0; transform:translateX(-14px); } to { opacity:1; transform:none; } }
+@keyframes card-reveal { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+@keyframes nav-arrive { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:none; } }
+@keyframes bar-glint { 0%,65% { transform:translateX(-100%); } 100% { transform:translateX(100%); } }
+@keyframes click-ring { to { transform:scale(5); opacity:0; } }
+@media (max-width:700px) { [data-testid="stApp"]::before { animation:none; } }

@@ -1,0 +1,63 @@
+:root { --bg:#f4f5ed; --surface:#fffef8; --raised:#e7ecdf; --line:#cbd5c3; --ink:#233227; --muted:#596c5e; --accent:#526d22; --fx-ink-a:#638349; --fx-ink-b:#277b86; color-scheme:light; }
+[data-testid="stApp"] { background:radial-gradient(ellipse at 95% 0%,#d6e9ab55,transparent 48%),radial-gradient(#51664e15 1px,transparent 1px),var(--bg); background-size:auto,24px 24px,auto; color:var(--ink); }
+[data-testid="stAppViewContainer"], [data-testid="stMain"] { color:var(--ink); }
+[data-testid="stSidebar"] { background:#e9eddf; border-color:var(--line); }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:has(input:checked) { background:#dce6c9; border-color:#91a573; color:var(--accent); }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover { background:#e0e7d5; }
+[data-testid="stApp"] label, [data-testid="stMarkdownContainer"], [data-testid="stWidgetLabel"], [data-testid="stMetricLabel"] { color:var(--ink); }
+.rail-label,.suggestion-label span,.workflow-strip b,.workspace-footer { color:var(--muted); }
+.studio-symbol { background:#dae9bd; border-color:#9aaf75; }
+.st-key-composer { background:linear-gradient(140deg,#fffef8,#ecf1e3); border-color:#b0bea1; box-shadow:0 15px 45px #35472a0c; }
+.st-key-composer:focus-within { border-color:#788e57; }
+[data-baseweb="textarea"],[data-baseweb="input"],[data-baseweb="select"] > div { background:#fffef8 !important; border-color:var(--line) !important; color:var(--ink) !important; }
+[data-testid="stTextArea"] textarea,[data-testid="stApp"] input { background:#fffef8 !important; color:var(--ink) !important; caret-color:var(--accent); }
+textarea::placeholder,input::placeholder { color:#788573 !important; }
+[data-testid="stButton"] button,[data-testid="stDownloadButton"] button,[data-testid="stFormSubmitButton"] button { background:#fffef8; color:var(--ink); border-color:var(--line); }
+button[kind="primary"],button[kind="primaryFormSubmit"] { background:#d6ed9b !important; color:#24311b !important; border-color:#a6bd79 !important; }
+button[kind="primary"]:hover { background:#c4e57b !important; }
+[data-testid="stExpander"],.st-key-scalar_result { background:#fffef8; border-color:var(--line); }
+[data-testid="stExpander"] details summary { color:var(--ink); }
+[data-baseweb="tab"] { color:var(--muted); }
+[data-baseweb="tab"][aria-selected="true"] { color:var(--accent); }
+[data-testid="stAlert"] { background:#e7eedf; color:var(--ink); }
+[data-testid="stAlert"] p { color:var(--ink); }
+.status-pill.success { color:#446218; border-color:#93aa68; background:#e2edcd; }
+.status-pill.review { color:#865900; border-color:#c9aa66; background:#f5ebcf; }
+.status-pill.danger { color:#a74432; border-color:#cd9c8d; background:#fae8df; }
+.hero-copy .hero-subtitle,.hero-tag { color:var(--muted); }
+.machine-label { color:#34492f; background:#edf3e1f2; border-color:#afbf95; }
+.machine-halo { background:radial-gradient(ellipse,#91ac4c24,transparent 70%); }
+.query-loading,.data-picture { background:linear-gradient(120deg,#e6efd4,#fffef8); border-color:#b5c4a0; }
+.loader-copy p,.loader-note,.picture-label { color:var(--muted); }
+.loader-core i { background:#88a84c; }
+.loader-track { border-color:#9bae82; }
+.loader-signal i { background:#637c34; }
+.picture-track { background:#e0e8d6; }
+.picture-bar { background:linear-gradient(90deg,#66883b,#b2cf68); }
+.picture-row:hover .picture-bar { background:linear-gradient(90deg,#277b86,#92b355); }
+.archive-day i { background:linear-gradient(90deg,#8ca16a,transparent); }
+/* Canvas-rendered native tables retain sorting, selection, and column tools. */
+[data-testid="stDataFrame"] canvas { filter:invert(1) hue-rotate(180deg); }
+[data-testid="stDataFrame"] { background:#fffef8; border:1px solid var(--line); }
+[data-testid="stCode"] { filter:invert(1) hue-rotate(180deg); }
+[data-testid="stAudioInput"] { filter:invert(1) hue-rotate(180deg); }
+[data-baseweb="popover"] [role="listbox"], [data-baseweb="popover"] [role="option"], [data-baseweb="calendar"], [data-baseweb="calendar"] * { background:#fffef8 !important; color:var(--ink) !important; }
+[data-baseweb="select"] svg,[data-baseweb="input"] svg { fill:var(--ink); color:var(--ink); }
+[data-testid="stNumberInput"] button { background:#e7ecdf; color:var(--ink); }
+[data-testid="stCheckbox"] label,[data-testid="stToggle"] label { color:var(--ink); }
+[data-testid="stExpandSidebarButton"], [data-testid="stSidebarCollapseButton"] button { background:#dce6cd !important; color:#304423 !important; border:1px solid #8b9f75 !important; border-radius:8px; box-shadow:0 2px 8px #30442314; }
+[data-testid="stExpandSidebarButton"] *, [data-testid="stSidebarCollapseButton"] button * { color:#304423 !important; fill:currentColor !important; }
+[data-testid="stExpandSidebarButton"]:hover, [data-testid="stSidebarCollapseButton"] button:hover { background:#cbdcb4 !important; border-color:#526d22 !important; }
+[data-testid="stExpandSidebarButton"]:focus-visible, [data-testid="stSidebarCollapseButton"] button:focus-visible { outline:2px solid #526d22 !important; outline-offset:3px; }
+/* Streamlit's segmented controls use React Aria data-selected, not button kind. */
+[data-testid="stButtonGroup"] button { background:var(--surface) !important; color:var(--ink) !important; border-color:#9cac8b !important; opacity:1 !important; }
+[data-testid="stButtonGroup"] button * { color:inherit !important; }
+[data-testid="stButtonGroup"] button[data-selected], [data-testid="stButtonGroup"] button[aria-pressed="true"] { background:#dce9c4 !important; color:#273d1c !important; border-color:#6e854e !important; box-shadow:inset 0 0 0 1px #6e854e; }
+[data-testid="stButtonGroup"] button:hover:not(:disabled), [data-testid="stButtonGroup"] button[data-hovered]:not(:disabled) { background:#e7eedb !important; color:#233227 !important; }
+[data-testid="stButtonGroup"] button[data-selected]:hover:not(:disabled) { background:#cddfb0 !important; }
+[data-testid="stButtonGroup"] button:focus-visible, [data-testid="stButtonGroup"] button[data-focus-visible] { outline:2px solid #526d22 !important; outline-offset:3px; }
+[data-testid="stButtonGroup"] button:disabled, [data-testid="stButtonGroup"] button[data-disabled] { color:#697969 !important; background:#edf0e6 !important; border-color:#cbd5c3 !important; box-shadow:none; }
+[data-baseweb="input"] button, [data-baseweb="select"] [role="combobox"] { color:var(--ink) !important; background:transparent !important; }
+[data-baseweb="input"] button:hover { background:#e7ecdf !important; }
+[data-baseweb="tab-highlight"] { background:var(--accent) !important; }
+[data-baseweb="calendar"] [aria-selected="true"], [data-baseweb="calendar"] [aria-selected="true"] * { background:#dce9c4 !important; color:#273d1c !important; }

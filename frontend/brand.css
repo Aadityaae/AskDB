@@ -1,0 +1,27 @@
+.askdb-logo {display:inline-flex;align-items:center;gap:11px;vertical-align:middle;flex-shrink:0;}
+.askdb-mark {display:block;width:42px;height:42px;flex-shrink:0;overflow:visible;}
+.askdb-name {font-family:Syne,sans-serif;font-size:25px;font-weight:800;letter-spacing:-1.1px;line-height:1;color:var(--ink);}
+.askdb-name>span {color:var(--accent);}
+.askdb-eyes {transform-origin:40px 28px;animation:askdb-blink 6s ease-in-out infinite;}
+.askdb-row {animation:askdb-think 6s ease-in-out infinite;}
+.askdb-logo:hover .askdb-mark {animation:askdb-hello .65s ease-in-out;}
+.studio-brand {gap:0;margin-bottom:35px;}
+.studio-brand .askdb-mark {width:47px;height:47px;}
+.studio-brand small {padding-left:58px;margin-top:8px;}
+.auth-brand {display:block;}
+.auth-brand .askdb-mark {width:48px;height:48px;}
+.auth-brand .askdb-name {font-size:31px;letter-spacing:-1.4px;}
+.auth-brand>small {display:block;margin:9px 0 0 59px;letter-spacing:.05em;font-size:10px;opacity:1;color:var(--muted);}
+.topline-brand {display:flex;align-items:center;gap:20px;}
+.topline-brand .askdb-mark {width:28px;height:28px;}
+.topline-brand .askdb-name {font-size:19px;letter-spacing:-.7px;}
+.topline-brand>.breadcrumb {border-left:1px solid var(--line);padding-left:18px;}
+.workspace-footer .askdb-mark {width:22px;height:22px;}
+.workspace-footer .askdb-name {font-size:16px;letter-spacing:-.5px;}
+.workspace-footer .askdb-logo {gap:7px;}
+@keyframes askdb-blink {0%,34%,38%,72%,76%,100%{transform:scaleY(1);}36%,74%{transform:scaleY(.08);}}
+@keyframes askdb-think {0%,10%,42%,100%{stroke:#20342b;}20%,30%{stroke:#48838b;}}
+@keyframes askdb-hello {0%,100%{transform:rotate(0);}25%{transform:rotate(-10deg);}60%{transform:rotate(7deg);}}
+body.fx-paused .askdb-mark * {animation-play-state:paused!important;}
+@media(max-width:600px) {.topline-brand{gap:10px;}.topline-brand>.breadcrumb{padding-left:10px;font-size:8px;}.topline-brand .askdb-name{display:none;}.auth-brand>small{margin-left:59px;}}
+@media(prefers-reduced-motion:reduce) {.askdb-logo .askdb-mark,.askdb-mark *{animation:none!important;}}

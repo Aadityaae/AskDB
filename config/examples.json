@@ -1,0 +1,6 @@
+[
+  {"question":"How many customers are there?","sql":"SELECT COUNT(*) AS customer_count FROM customers","tables":["customers"]},
+  {"question":"How many orders are completed?","sql":"SELECT COUNT(*) AS order_count FROM orders WHERE status = 'completed'","tables":["orders"]},
+  {"question":"Show the five most expensive products","sql":"SELECT name, price FROM products ORDER BY price DESC, id LIMIT 5","tables":["products"]},
+  {"question":"Count customers per region","sql":"SELECT r.name, COUNT(c.id) AS customers FROM regions r LEFT JOIN customers c ON c.region_id = r.id GROUP BY r.id, r.name ORDER BY r.name","tables":["customers","regions"]}
+]

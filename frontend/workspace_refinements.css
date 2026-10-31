@@ -1,0 +1,75 @@
+/* A more precise finish for the press-sheet workspace. No scroll interception. */
+.stApp [data-testid="stMain"]{scrollbar-gutter:stable;scroll-behavior:smooth!important;scroll-padding-top:110px;}
+.stApp .st-key-workspace_nav{position:sticky;top:12px;border-width:3px;box-shadow:4px 4px 0 var(--shadow-ink);}
+.stApp .st-key-workspace_nav [role="radiogroup"]{scroll-behavior:smooth!important;}
+.stApp .st-key-workspace_nav [data-testid="stRadio"] label{transition:background-color 140ms ease,color 140ms ease!important;}
+.stApp [class*="st-key-workspace_page_"]{animation:workspace-arrive 180ms ease-out both!important;}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button{
+  min-height:46px;padding:10px 18px!important;border-width:2px!important;border-radius:2px!important;
+  box-shadow:3px 3px 0 var(--shadow-ink)!important;font-size:14px!important;letter-spacing:-.015em;line-height:1.3;
+  transition:transform 140ms cubic-bezier(.2,.7,.2,1),background-color 140ms ease,color 140ms ease!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:not(:disabled):not([aria-disabled="true"]):hover{
+  background:var(--dp-color-ground)!important;color:#000!important;border-color:#000!important;
+  transform:translateY(-2px)!important;box-shadow:3px 3px 0 var(--shadow-ink)!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stFormSubmitButton"]) button:is([kind="primary"],[kind="primaryFormSubmit"]){
+  background:#000!important;color:#fff5f1!important;border-color:#000!important;box-shadow:3px 3px 0 var(--dp-color-emphasis)!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stFormSubmitButton"]) button:is([kind="primary"],[kind="primaryFormSubmit"]):not(:disabled):not([aria-disabled="true"]):hover{
+  background:var(--dp-color-emphasis)!important;color:#000!important;border-color:#000!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:not(:disabled):active{
+  transform:translate(2px,2px)!important;box-shadow:3px 3px 0 var(--shadow-ink)!important;
+}
+.stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:is(:disabled,[aria-disabled="true"]){
+  background:var(--raised)!important;color:var(--muted)!important;box-shadow:none!important;transform:none!important;
+}
+.stApp .st-key-workspace_nav [data-testid="stPopover"] button{min-height:38px;padding:7px 10px!important;box-shadow:2px 2px 0 var(--shadow-ink)!important;}
+.stApp .st-key-query_send button{min-height:48px;font-size:15px!important;}
+.voice-capture-button{width:100%;min-height:48px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 18px;border:2px solid var(--line);border-radius:2px;background:var(--surface);color:var(--ink);box-shadow:3px 3px 0 var(--shadow-ink);font:800 14px var(--dp-typography-face);cursor:pointer;}
+.voice-capture-button span,.voice-capture-button svg{color:inherit!important;}
+.voice-capture-button:not(:disabled):hover{background:var(--dp-color-ground);color:#000;border-color:#000;}
+.voice-capture-button[data-recording="true"]{background:var(--dp-color-signal);color:#000;border-color:#000;}
+.voice-capture-button:disabled{cursor:wait;opacity:1;color:var(--muted);background:var(--raised);box-shadow:none;}
+.voice-capture-status{font:700 12px/1.4 var(--dp-typography-face);color:var(--ink);margin-top:8px;min-height:34px;overflow-wrap:anywhere;}
+.stApp .st-key-suggestion_grid [data-testid="stButton"] button,
+.stApp .st-key-suggestion_grid [data-testid="stButton"] button:not(:disabled):not([aria-disabled="true"]):hover{
+  padding:8px 0!important;border:0!important;background:transparent!important;color:var(--ink)!important;box-shadow:none!important;transform:none!important;
+}
+.stApp .st-key-suggestion_grid [data-testid="stButton"] button:hover p{text-decoration:underline;text-underline-offset:4px;}
+.stApp [data-baseweb="input"],.stApp [data-baseweb="textarea"],.stApp [data-baseweb="select"]>div{border-width:2px!important;}
+.stApp [data-testid="stTextInput"] input,.stApp [data-testid="stNumberInput"] input{min-height:42px;padding:10px 12px;}
+.stApp .st-key-composer{padding:26px!important;box-shadow:5px 5px 0 var(--shadow-ink)!important;}
+.stApp .st-key-composer [data-testid="stTextArea"] textarea{padding:14px 16px!important;}
+.stApp .st-key-composer [data-testid="stHorizontalBlock"]{gap:18px;}
+.stApp .st-key-suggestion_grid [data-testid="stColumn"]{box-shadow:3px 3px 0 var(--shadow-ink);}
+.stApp .composer-foot{font-size:11px;letter-spacing:.02em;}
+/* Avoid large filtered/composited surfaces and persistent animation layers. */
+.stApp [data-testid="stVegaLiteChart"],.stApp [data-testid="stDataFrame"]{animation:none!important;}
+/* Opacity alone cannot move the containing block of floating native controls. */
+@keyframes workspace-arrive{from{opacity:.65}to{opacity:1}}
+.stApp .st-key-voice_panel{width:100%;min-width:0;padding:16px;background:var(--surface);border:2px solid var(--line);}
+.stApp .st-key-voice_panel [data-testid="stAudioInput"]{width:100%;max-width:100%;min-width:0;filter:none!important;color-scheme:dark;background:#1b2428!important;color:#fff5f1!important;}
+.stApp .st-key-voice_panel [data-testid="stAudioInput"] button{min-height:0!important;padding:0!important;border:0!important;box-shadow:none!important;transform:none!important;transition:none!important;}
+.stApp .st-key-voice_panel [data-testid="stAudioInput"] button,
+.stApp .st-key-voice_panel [data-testid="stAudioInput"] button :is(p,span,svg){background:transparent!important;color:#fff5f1!important;}
+.stApp .st-key-voice_panel [data-testid="stAudioInput"] [data-testid="stWidgetLabel"] p,
+.stApp .st-key-voice_panel [data-testid="stAudioInput"] [data-testid="stMarkdownContainer"]>p,
+.stApp .st-key-voice_panel [data-testid="stAudioInput"] svg{color:#fff5f1!important;}
+@media(max-width:480px){.stApp .st-key-voice_panel{padding:10px;}}
+@media(max-width:720px){
+  .stApp .st-key-workspace_nav{position:relative;top:auto;}
+  .stApp .st-key-composer{padding:18px!important;}
+  .stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button{padding:10px 12px!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .stApp [class*="st-key-workspace_page_"]{animation:none!important;}
+  .stApp [data-testid="stMain"],.stApp .st-key-workspace_nav [role="radiogroup"]{scroll-behavior:auto!important;}
+  .stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button,
+  .stApp .st-key-workspace_nav [data-testid="stRadio"] label{transition:none!important;}
+  .stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:not(:disabled):not([aria-disabled="true"]):is(:hover,:active){transform:none!important;}
+}
+:root:has(.workspace-motion-off) .stApp *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+:root:has(.workspace-motion-off) .stApp :is([data-testid="stButton"],[data-testid="stDownloadButton"],[data-testid="stFormSubmitButton"],[data-testid="stPopover"]) button:not(:disabled):not([aria-disabled="true"]):is(:hover,:active){transform:none!important;}
